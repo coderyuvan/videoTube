@@ -95,6 +95,21 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
 
 const getLikedVideos = asyncHandler(async (req, res) => {
     //TODO: get all liked videos
+    const user=req.body?._id
+    if(!user) {
+        throw new ApiError(400,"No video is being liked by the user")
+    }
+
+   const likedVideos= await Like.findById({
+        likedBy:user
+    }).populate('video')
+
+    if(!likedVideos) {
+        throw new ApiError(404, "No video is being liked by the user")
+    }
+    
+    return res.status(200).json(200,likedVideos,"liked videos succcessfully")
+
 })
 
 export {
