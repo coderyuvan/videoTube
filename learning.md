@@ -126,7 +126,7 @@ by creating a user object-create entry in db
 8:check for user creation using a response
 9: return response iff created user succesfully else return error
 
-l# ec-15 debug ka and postman seekha 
+# lec-15 debug ka and postman seekha 
 
 
 # LECTURE-16 Access Refresh Token, Middleware and cookies in Backend
@@ -223,3 +223,18 @@ watchhsitroy se join krte himultiple documents milenge for videos but unme owner
 
 
 req.user_id se hme string milega jo ki mongoose find findby id m automatic usse monogodb m behnd search kr lega
+
+
+# extra beyond hitesh sir backend
+``` javascript
+ pagination means 1 page p kitna content show krna uski limit eg 10 video on 1 page then on 2nd next content bt limit will be same
+ page 1: 1-10
+ page 2: 11-20
+ page 3: 21-30
+ so we are skipping basically content which is imp
+ let page=req.query.page||1
+ let limit=req.query.limit||3
+ let skip=(page-1)*limit
+
+ .skip(skip).limit(limit) // . wale mongoosek methods h ander arguemnt jo hmne create kre h
+ 
