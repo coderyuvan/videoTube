@@ -1,4 +1,4 @@
-import { asyncHandler } from "../utils/asyncHndler.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import {ApiError} from "../utils/ApiError.js"
 // for 3 we import user
 import {User} from "../models/user.model.js"
@@ -74,7 +74,7 @@ if(req.files&& Array.isArray(req.files.avatar)&& req.files.avatar.length>0){
   
   //5.
     const avatar=await uploadOnClodinary(avatarLocalPath)
-    const   coverImage=await uploadOnClodinary(coverImageLocalPath );
+    const coverImage=await uploadOnClodinary(coverImageLocalPath );
      
     if(!avatar) {
         throw new ApiError(400,"avatar file is required")

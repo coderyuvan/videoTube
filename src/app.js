@@ -27,10 +27,11 @@ app.use(cookieParser())
 
 // routes import 
 import userRouter from './routes/user.routes.js'
-
+import playlistRouter from "./routes/playlist.routes.js"
 
 //routes declaratrion
 app.use("/api/v1/users",userRouter)
+app.use("/api/v1/playlist", playlistRouter)
 // /user k baad control route p pass hoga
 // http://localhost:8000/users is prefix then /register and so on will get added to url
 export {app}
