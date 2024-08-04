@@ -149,7 +149,7 @@ const getChannelStats = asyncHandler(async (req, res) => {
      obj["commentlikes"]=LikesDetailsofcomments
 
      return res.json(
-        new apiResponse(
+        new ApiResponse(
             200,
             obj
             

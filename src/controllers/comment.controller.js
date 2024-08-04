@@ -9,6 +9,54 @@ const getVideoComments = asyncHandler(async (req, res) => {
     //TODO: get all comments for a video
     const {videoId} = req.params
     const {page = 1, limit = 10} = req.query
+    const skip = (page - 1) * limit
+    const user=req.user?._id
+    if(!isValidObjectId(videoId)) {
+        throw new ApiError(400,"Invalid VideoId")
+    }
+   const VideoComments= await Comment.aggregate([
+        {
+           $match:{
+          video:videoId
+           }
+        },
+        
+        {
+          $lookup:{
+            from:"videos",
+            localField:"video",
+            foreignField:"_id",
+            as:"videoComments"
+          }
+        },
+        {
+            $unwind:"$videoComments"
+        },
+        {
+            $project:{
+                videoComments:1,
+                owner:1
+            }
+        },
+        {
+            $skip:skip
+        },
+        {
+            $limit:parseInt(limit)
+        }
+        
+    ])
+
+    if(!VideoComments) {
+        throw new ApiError(404, "No comments found")
+    }
+    return res
+    .status(200)
+    .json(
+        200,
+        VideoComments,
+        "Comments Fetched Succesfully"
+    )
 })
 
 
